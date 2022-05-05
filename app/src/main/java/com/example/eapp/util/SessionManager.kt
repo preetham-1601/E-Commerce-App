@@ -8,12 +8,21 @@ class SessionManager(context: Context) {
     val PREF_NAME = "EApp"
 
     val KEY_IS_LOGGEDIN = "isLoggedIn"
+    val KEY_IS_FAV = "isFav"
     var pref = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
     var editor = pref.edit()
 
     fun setLogin(isLoggedIn: Boolean){
         editor.putBoolean(KEY_IS_LOGGEDIN, isLoggedIn)
         editor.apply()
+    }
+    fun setFavFrag(isFav: Boolean){
+        editor.putBoolean(KEY_IS_FAV, isFav)
+        editor.apply()
+    }
+
+    fun isFav(): Boolean {
+        return pref.getBoolean(KEY_IS_FAV, false)
     }
 
 

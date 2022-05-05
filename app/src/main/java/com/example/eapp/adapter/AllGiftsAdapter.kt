@@ -2,20 +2,27 @@ package com.example.eapp.adapter
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.AsyncTask
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
+import androidx.core.app.ActivityCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import com.android.volley.toolbox.Volley
 import com.example.eapp.R
 import com.example.eapp.database.GiftDatabase
 import com.example.eapp.database.GiftEntity
+import com.example.eapp.fragment.HomeFragmentDirections
+import com.example.eapp.fragment.LoginFragment
 import com.example.eapp.model.Gift
+import com.example.eapp.util.SessionManager
 import com.squareup.picasso.Picasso
 
 class AllGiftsAdapter(private val context: Context, private var gifts: ArrayList<Gift>,
@@ -23,6 +30,7 @@ class AllGiftsAdapter(private val context: Context, private var gifts: ArrayList
 ) : RecyclerView.Adapter<AllGiftsAdapter.ItemViewHolder>(),Filterable {
 
 
+    lateinit var sessionManager: SessionManager
     fun setData(gifts: ArrayList<Gift>){
         this.gifts = gifts
         this.giftsFilter = giftsFilter
@@ -37,6 +45,7 @@ class AllGiftsAdapter(private val context: Context, private var gifts: ArrayList
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        sessionManager = SessionManager(context)
         val gift = gifts[position]
         //holder.idImage.setImageResource(gift.giftImage)
         Picasso.get().load(gift.giftImage).into(holder.idImage);
@@ -52,34 +61,58 @@ class AllGiftsAdapter(private val context: Context, private var gifts: ArrayList
         }
 
         holder.favImage.setOnClickListener {
-            val giftEntity = GiftEntity(
-                gift.giftId,
-                gift.giftImage,
-                gift.giftCaption,
+            if (sessionManager.isLoggedIn()){
+                    val giftEntity = GiftEntity(
+                        gift.giftId,
+                        gift.giftImage,
+                        gift.giftCaption,
 
-            )
+                        )
 
-            if (!DBAsyncTask(context, giftEntity, 1).execute().get()) {
-                val async =
-                    DBAsyncTask(context, giftEntity, 2).execute()
-                val result = async.get()
-                if (result) {
-                    holder.favImage.setImageResource(R.drawable.ic_action_fav_checked)
-                }
+                    if (!DBAsyncTask(context, giftEntity, 1).execute().get()) {
+                        val async =
+                            DBAsyncTask(context, giftEntity, 2).execute()
+                        val result = async.get()
+                        if (result) {
+                            holder.favImage.setImageResource(R.drawable.ic_action_fav_checked)
+                        }
+                    } else {
+                        val async = DBAsyncTask(context, giftEntity, 3).execute()
+                        val result = async.get()
+
+                        if (result) {
+                            holder.favImage.setImageResource(R.drawable.ic_action_fav)
+                        }
+                    }
             } else {
-                val async = DBAsyncTask(context, giftEntity, 3).execute()
-                val result = async.get()
+                val builder = AlertDialog.Builder(context)
+                builder.setTitle("Confirmation")
+                    .setMessage("Login to Use Your WishList")
+                    .setPositiveButton("Login") { _, _ ->
+                        sessionManager.setLogin(false)
+                        findNavController(holder.idItem).navigate(R.id.action_homeFragment_to_loginFragment)
 
-                if (result) {
-                    holder.favImage.setImageResource(R.drawable.ic_action_fav)
-                }
+                        Volley.newRequestQueue(context as Activity).cancelAll(this::class.java.simpleName)
+                        ActivityCompat.finishAffinity(context)
+                    }
+                    .setNegativeButton("No") { _, _ ->
+
+                    }
+                    .create()
+                    .show()
             }
+
+
         }
 
         holder.llContent.setOnClickListener {
-
-            val bundle = bundleOf("image_url" to gift.giftImage,"caption" to gift.giftCaption)
-            findNavController(holder.idItem).navigate(R.id.action_homeFragment_to_itemDetailsFragment,bundle)
+            if(sessionManager.isFav()){
+                val bundle = bundleOf("image_url" to gift.giftImage,"caption" to gift.giftCaption)
+                findNavController(holder.idItem).navigate(R.id.action_favouritesFragment_to_itemDetailsFragment,bundle)
+            }else{
+                val bundle = bundleOf("image_url" to gift.giftImage,"caption" to gift.giftCaption)
+                findNavController(holder.idItem).navigate(R.id.action_homeFragment_to_itemDetailsFragment,bundle)
+            }
         }
 
 

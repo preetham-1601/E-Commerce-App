@@ -20,6 +20,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
+        android:visibility="visible"
         android:id="@+id/btn_get"
         android:layout_width="280dp"
         android:layout_height="55dp"

@@ -65,7 +65,7 @@ class HomeFragment : Fragment() {
 
 
         val queue = Volley.newRequestQueue(activity as Context)
-        val url = "https://v1.nocodeapi.com/preetham/instagram/fuohUBTRCBMwXSDj"
+        val url = "https://v1.nocodeapi.com/preetham/instagram/BDNRRhYYzNySAFHa"
 
         val jsonObjectRequest = object : JsonObjectRequest(
             Method.GET,
@@ -103,7 +103,7 @@ class HomeFragment : Fragment() {
             override fun getHeaders(): MutableMap<String, String> {
                 val headers = HashMap<String, String>()
                 headers["Content-type"] = "application/json"
-                headers["token"] = "IGQVJVSVVzSHpaTHd4VHZAXaWRZAYko2aHRQdkg3eThQb3RPbjBMbmdUQ1BkMmMxODFMMUFJVUttVVp0WGcwMGFwSTZAkU3BxcFY0UHh6Y1BjWWlMenNPMXFrNE1rMUNuOUJKN0FCMXMxR19abVZASZA1lrWAZDZD"
+                headers["token"] = "IGQVJVaHZAiVGhzajVWdVFPeTdNTGdiQlZA2emJsZA20tRVNNQlhQWUdtdW1JbHNpd0ZACTzFBcUVseFZAOcTF6QTVRWmtFdXFBVTQ0eEg0TWFUbmZAvVHdVV1Vqa3ppOXE0RG5TX25LLXdsM0VMSV9TWlJvMQZDZD"
                 return headers
             }
         }
@@ -126,7 +126,7 @@ class HomeFragment : Fragment() {
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.options_menu, menu)
+        activity?.menuInflater?.inflate(R.menu.options_menu, menu)
 
         val menuItem = menu!!.findItem(R.id.search)
 
@@ -202,6 +202,7 @@ class HomeFragment : Fragment() {
 
 
     }
+
 
 
 

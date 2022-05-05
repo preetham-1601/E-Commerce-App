@@ -7,7 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.eapp.R
 import com.example.eapp.databinding.FragmentRegisterBinding
 import com.example.eapp.model.User
@@ -23,6 +27,7 @@ class RegisterFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,9 +48,6 @@ class RegisterFragment : Fragment() {
             registerUser()
 
         }
-
-
-
 
         return view
     }

@@ -1,5 +1,6 @@
 package com.example.eapp.fragment
 
+import android.app.Activity
 import android.content.Context
 import android.os.AsyncTask
 import android.os.Bundle
@@ -23,6 +24,7 @@ import com.example.eapp.database.GiftEntity
 import com.example.eapp.databinding.FragmentFavouritesBinding
 import com.example.eapp.databinding.FragmentHomeBinding
 import com.example.eapp.model.Gift
+import com.example.eapp.util.SessionManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class FavouritesFragment : Fragment() {
@@ -33,6 +35,7 @@ class FavouritesFragment : Fragment() {
     private var giftList = arrayListOf<Gift>()
     private var searchGiftList = arrayListOf<Gift>()
 
+    lateinit var sessionManager: SessionManager
     lateinit var recyclerAdapter: AllGiftsAdapter
 
 
@@ -49,7 +52,8 @@ class FavouritesFragment : Fragment() {
         val view = binding.root
 
 
-
+        sessionManager = SessionManager(context as Activity)
+        sessionManager.setFavFrag(true)
 
         return view
     }
@@ -60,6 +64,7 @@ class FavouritesFragment : Fragment() {
 
         binding.bottomNavigationView.selectedItemId = R.id.fav
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
+            sessionManager.setFavFrag(false)
             when(it.itemId){
 
                 R.id.home->findNavController().navigate(R.id.action_favouritesFragment_to_homeFragment)
@@ -112,7 +117,7 @@ class FavouritesFragment : Fragment() {
     /*A new async class for fetching the data from the DB*/
     class FavouritesAsync(context: Context) : AsyncTask<Void, Void, List<GiftEntity>>() {
 
-        val db = Room.databaseBuilder(context, GiftDatabase::class.java, "res-db").build()
+        val db = Room.databaseBuilder(context, GiftDatabase::class.java, "gift-db").build()
 
         override fun doInBackground(vararg params: Void?): List<GiftEntity> {
 
