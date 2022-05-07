@@ -1,11 +1,14 @@
 package com.example.eapp.fragment
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Response
@@ -13,12 +16,9 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.eapp.R
 import com.example.eapp.adapter.AllGiftsAdapter
-import com.example.eapp.model.Gift
-import kotlin.collections.HashMap
-import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
 import com.example.eapp.databinding.FragmentHomeBinding
-import java.util.Locale.filter
+import com.example.eapp.model.Gift
+import com.example.eapp.util.SessionManager
 
 
 class HomeFragment : Fragment() {
@@ -28,7 +28,7 @@ class HomeFragment : Fragment() {
     private var giftList = arrayListOf<Gift>()
     private var giftListFilter = arrayListOf<Gift>()
     private lateinit var navController: NavController
-
+    lateinit var sessionManager: SessionManager
     lateinit var recyclerAdapter: AllGiftsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,11 +44,65 @@ class HomeFragment : Fragment() {
         val view = binding.root
 
 
+        sessionManager = SessionManager(context as Activity)
+        sessionManager.setFavFrag(false)
 
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
+
+        binding.toolbar.toolbar.inflateMenu(R.menu.options_menu)
+        binding.toolbar.toolbar.title = "Home"
+        binding.rlLoading.visibility = View.VISIBLE
+
+        binding.toolbar.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.search -> {
+                    // Navigate to settings screen
+                    val menuItem = binding.toolbar.toolbar.menu.findItem(R.id.search)
+                    val searchView = menuItem.actionView as SearchView
+
+                    searchView.maxWidth = Int.MAX_VALUE
+                    searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                        override fun onQueryTextSubmit(filterString: String?): Boolean {
+                            recyclerAdapter.filter.filter(filterString)
+
+                            Toast.makeText(
+                                activity as Context,
+                                "no",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            return true
+                        }
+
+                        override fun onQueryTextChange(filterString: String?): Boolean {
+                            recyclerAdapter.filter.filter(filterString)
+
+                            Toast.makeText(
+                                activity as Context,
+                                "Successfully LoggedIn",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            return true
+
+                        }
+
+
+                    })
+
+
+                    true
+                }
+                R.id.action_cart ->{
+                    findNavController().navigate(R.id.action_homeFragment_to_cartFragment)
+                    true
+                }
+                else -> false
+            }
+        }
 
         binding.bottomNavigationView.selectedItemId = R.id.home
 
@@ -86,6 +140,8 @@ class HomeFragment : Fragment() {
 
 
                 }
+
+                binding.rlLoading.visibility = View.GONE
                 recyclerView = binding.recyclerView
                 recyclerAdapter = AllGiftsAdapter(activity as Context,giftList,giftListFilter)
                 //recyclerAdapter!!.setData(giftList)
@@ -120,88 +176,18 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-
-
-
-
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        activity?.menuInflater?.inflate(R.menu.options_menu, menu)
-
-        val menuItem = menu!!.findItem(R.id.search)
-
-        val searchView = menuItem.actionView as SearchView
-
-        searchView.maxWidth = Int.MAX_VALUE
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(filterString: String?): Boolean {
-                recyclerAdapter.filter.filter(filterString)
-
-                Toast.makeText(
-                    activity as Context,
-                    "no",
-                    Toast.LENGTH_SHORT
-                ).show()
-                return true
-            }
-
-            override fun onQueryTextChange(filterString: String?): Boolean {
-                recyclerAdapter.filter.filter(filterString)
-
-                Toast.makeText(
-                    activity as Context,
-                    "Successfully LoggedIn",
-                    Toast.LENGTH_SHORT
-                ).show()
-                return true
-
-            }
-
-
-        })
-
-
-
-
-
-        /*searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                TODO("Not yet implemented")
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-
-                searchGiftList.clear()
-
-                val searchText = newText!!.lowercase(Locale.getDefault())
-
-                if(searchText.isNotEmpty()){
-                    searchGiftList.forEach{
-                        if(it.giftCaption.lowercase(Locale.getDefault()).contains(searchText)){
-                            searchGiftList.add(it)
-                        }
-                    }
-                    recyclerView.adapter!!.notifyDataSetChanged()
-                }else{
-
-                    Toast.makeText(activity as Context, "No ", Toast.LENGTH_SHORT)
-                        .show()
-                    searchGiftList.clear()
-                    searchGiftList.addAll(giftList)
-                    recyclerView.adapter!!.notifyDataSetChanged()
-
-
-                }
-
-                return false
-            }
-
-        })
-
-        return super.onCreateOptionsMenu(menu, inflater)*/
-
-
+    fun onBackPressed() {
+        onBackPressed()
     }
+
+
+
+
+
+
+
+
+
 
 
 

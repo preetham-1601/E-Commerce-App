@@ -50,6 +50,7 @@ class MainScreenFragment : Fragment() {
             Handler().postDelayed({
                 findNavController().navigate(R.id.action_mainScreenFragment_to_homeFragment)
             }, 2000)
+            onDestroy()
 
 
         } else {
@@ -57,6 +58,7 @@ class MainScreenFragment : Fragment() {
 
                 findNavController().navigate(R.id.action_mainScreenFragment_to_loginFragment)
                 //findNavController().navigate(R.id.action_mainScreenFragment_to_loginFragment)
+                onDestroy()
             }
 
 

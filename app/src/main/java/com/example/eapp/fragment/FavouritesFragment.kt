@@ -61,6 +61,8 @@ class FavouritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
 
+        binding.toolbar.toolbar.title = "WishList"
+
 
         binding.bottomNavigationView.selectedItemId = R.id.fav
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
@@ -132,4 +134,5 @@ class FavouritesFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

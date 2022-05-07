@@ -6,11 +6,16 @@
     tools:context=".fragment.CustomizationFragment"
     android:background="@color/brown">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
 
     <TextView
         android:id="@+id/txt_vw"
         android:layout_width="327dp"
         android:layout_height="59dp"
+        android:layout_below="@id/toolbar"
         android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
         android:text="@string/as_per_the_requirement_of_the_customization"

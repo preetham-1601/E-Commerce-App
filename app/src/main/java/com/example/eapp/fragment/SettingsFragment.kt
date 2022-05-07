@@ -43,6 +43,26 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        binding.toolbar.toolbar.inflateMenu(R.menu.logout_menu)
+        binding.toolbar.toolbar.title = "Settings"
+
+        binding.toolbar.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.action_logout ->{
+                    mAuth = FirebaseAuth.getInstance()
+
+                    mAuth.signOut()
+                    sessionManager.setLogin(false)
+                    findNavController().navigate(R.id.action_settingsFragment_to_loginFragment)
+                    onDestroy()
+                    true
+                }
+                else -> false
+            }
+
+        }
+
+
 
         binding.bottomNavigationView.selectedItemId = R.id.settings
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {

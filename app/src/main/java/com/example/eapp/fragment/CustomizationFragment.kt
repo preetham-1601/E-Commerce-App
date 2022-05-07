@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.eapp.R
 import com.example.eapp.databinding.FragmentCustomizationBinding
@@ -33,6 +34,13 @@ class CustomizationFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
+        binding.toolbar.toolbar.setNavigationIcon(R.drawable.ic_back)
+        binding.toolbar.toolbar.title = "Customization"
+
+        binding.toolbar.toolbar.setNavigationOnClickListener { view ->
+            findNavController().navigate(R.id.action_customizationFragment_to_cartFragment)
+        }
+
 
 
         sessionManager = SessionManager(activity as Context)
@@ -46,6 +54,8 @@ class CustomizationFragment : Fragment() {
         }
         binding.save.setOnClickListener {
 
+            Toast.makeText(activity as Context, "Items saved", Toast.LENGTH_SHORT)
+                .show()
             //uploadImage()
         }
 

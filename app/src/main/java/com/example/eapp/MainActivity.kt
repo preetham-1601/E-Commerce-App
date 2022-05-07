@@ -1,14 +1,20 @@
 package com.example.eapp
 
+import android.app.Activity
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.android.volley.toolbox.Volley
 import com.example.eapp.databinding.ActivityMainBinding
+import com.example.eapp.fragment.HomeFragment
+import com.example.eapp.fragment.MainScreenFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,8 +31,6 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         // Instantiate the navController using the NavHostFragment
         navController = navHostFragment.navController
-        // Make sure actions in the ActionBar get propagated to the NavController
-        setupActionBarWithNavController(navController)
         hideSystemBars()
     }
 
@@ -36,6 +40,10 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }*/
+
+
+
+
 
     private fun hideSystemBars() {
 

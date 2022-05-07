@@ -2,16 +2,14 @@ package com.example.eapp.fragment
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.eapp.R
 import com.example.eapp.databinding.FragmentRegisterBinding
 import com.example.eapp.model.User
@@ -31,6 +29,8 @@ class RegisterFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         setHasOptionsMenu(true)
     }
 
@@ -43,6 +43,13 @@ class RegisterFragment : Fragment() {
         // Initialising auth object
         auth = Firebase.auth
 
+        binding.toolbar.toolbar.setNavigationIcon(R.drawable.ic_back)
+        binding.toolbar.toolbar.title = "Register"
+        binding.toolbar.toolbar.setNavigationOnClickListener { view ->
+            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
+
+
 
         binding.btnRegister.setOnClickListener {
             registerUser()
@@ -51,6 +58,7 @@ class RegisterFragment : Fragment() {
 
         return view
     }
+
 
     private fun registerUser() {
         val name = binding.etName.text.toString()
@@ -82,7 +90,7 @@ class RegisterFragment : Fragment() {
         // email and pass in it.
         auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(requireActivity()) {task ->
             if (task.isSuccessful) {
-                Toast.makeText(activity as Context, "Successfully Singed Up", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity as Context, "Successfully Registered", Toast.LENGTH_SHORT).show()
                 database= FirebaseDatabase.getInstance().getReference("Users")
                 val user = User(name,email,mobileNumber,address,city,state,pinCode,pass)
 

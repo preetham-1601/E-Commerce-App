@@ -16,12 +16,16 @@
         android:visibility="visible">
 
 
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
+            android:layout_below="@id/toolbar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -62,7 +66,7 @@
             android:layout_below="@+id/imgEmptyCart"
             android:layout_centerHorizontal="true"
             android:padding="10dp"
-            android:text="@string/you_do_not_have_any_favourite_restaurant"
+            android:text="@string/you_do_not_have_any_favourite_items"
             android:textAlignment="center"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 

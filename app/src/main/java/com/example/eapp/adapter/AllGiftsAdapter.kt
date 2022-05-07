@@ -108,9 +108,10 @@ class AllGiftsAdapter(private val context: Context, private var gifts: ArrayList
         holder.llContent.setOnClickListener {
             if(sessionManager.isFav()){
                 val bundle = bundleOf("image_url" to gift.giftImage,"caption" to gift.giftCaption)
+                sessionManager.setFavFrag(false)
                 findNavController(holder.idItem).navigate(R.id.action_favouritesFragment_to_itemDetailsFragment,bundle)
             }else{
-                val bundle = bundleOf("image_url" to gift.giftImage,"caption" to gift.giftCaption)
+                val bundle = bundleOf("image_url" to gift.giftImage,"caption" to gift.giftCaption,)
                 findNavController(holder.idItem).navigate(R.id.action_homeFragment_to_itemDetailsFragment,bundle)
             }
         }
@@ -216,7 +217,7 @@ class AllGiftsAdapter(private val context: Context, private var gifts: ArrayList
                     val itemModel = ArrayList<Gift>()
                     for(item in gifts){
 
-                        if(item.giftCaption.contains(searchChr)){
+                        if(item.giftCaption.toString().lowercase().contains(searchChr)){
                             itemModel.add(item)
 
 
