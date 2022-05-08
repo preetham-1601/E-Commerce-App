@@ -56,7 +56,7 @@ class ItemDetailsFragment : Fragment() {
         }
 
         binding.btnCrt.setOnClickListener {
-
+            sessionManager.setFavFrag(true)
             val bundle = bundleOf("image_url" to bun,"caption" to dun)
             findNavController().navigate(R.id.action_itemDetailsFragment_to_cartFragment,bundle)
         }

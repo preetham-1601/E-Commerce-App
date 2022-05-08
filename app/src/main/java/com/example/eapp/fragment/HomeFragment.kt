@@ -176,9 +176,6 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    fun onBackPressed() {
-        onBackPressed()
-    }
 
 
 

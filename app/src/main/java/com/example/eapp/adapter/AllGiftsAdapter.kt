@@ -92,8 +92,6 @@ class AllGiftsAdapter(private val context: Context, private var gifts: ArrayList
                         sessionManager.setLogin(false)
                         findNavController(holder.idItem).navigate(R.id.action_homeFragment_to_loginFragment)
 
-                        Volley.newRequestQueue(context as Activity).cancelAll(this::class.java.simpleName)
-                        ActivityCompat.finishAffinity(context)
                     }
                     .setNegativeButton("No") { _, _ ->
 

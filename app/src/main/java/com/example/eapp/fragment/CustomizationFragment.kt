@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.eapp.R
 import com.example.eapp.databinding.FragmentCustomizationBinding
@@ -41,6 +42,9 @@ class CustomizationFragment : Fragment() {
             findNavController().navigate(R.id.action_customizationFragment_to_cartFragment)
         }
 
+        val sun = arguments?.getString("caption")
+
+        val bun = arguments?.getString("image_url")
 
 
         sessionManager = SessionManager(activity as Context)
@@ -54,8 +58,10 @@ class CustomizationFragment : Fragment() {
         }
         binding.save.setOnClickListener {
 
+            val bundle = bundleOf("caption" to sun,"image_url" to bun)
             Toast.makeText(activity as Context, "Items saved", Toast.LENGTH_SHORT)
                 .show()
+            findNavController().navigate(R.id.action_customizationFragment_to_cartFragment,bundle)
             //uploadImage()
         }
 
