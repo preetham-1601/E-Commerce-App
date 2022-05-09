@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.eapp.R
 import com.example.eapp.databinding.FragmentLoginBinding
@@ -69,18 +70,24 @@ class LoginFragment : Fragment() {
     private fun login() {
         val email = binding.etEmail.text.toString()
         val pass = binding.etPass1.text.toString()
+
         // calling signInWithEmailAndPassword(email, pass)
         // function using Firebase auth object
 
         if (Validations.validateEmail(binding.etEmail.text.toString()) && Validations.validatePasswordLength(binding.etPass1.text.toString())) {
             if (ConnectionManager().isNetworkAvailable(activity as Context)) {
                 auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(requireActivity()) {
-                        if (it.isSuccessful) {
+                    if (it.isSuccessful) {
+                        val uid = auth.currentUser?.uid!!
+                        sessionManager.putUid(uid)
                             Toast.makeText(
                                 activity as Context,
-                                "Successfully LoggedIn",
+                                "Successfully LoggedIn ",
                                 Toast.LENGTH_SHORT
                             ).show()
+
+
+
                             sessionManager.setLogin(true)
                             findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                         } else

@@ -168,6 +168,9 @@
         <action
             android:id="@+id/action_paymentsFragment_to_placeOrderFragment"
             app:destination="@id/placeOrderFragment" />
+        <action
+            android:id="@+id/action_paymentsFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNewAddressFragment"

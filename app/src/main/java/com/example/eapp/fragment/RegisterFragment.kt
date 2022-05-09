@@ -61,8 +61,9 @@ class RegisterFragment : Fragment() {
 
 
     private fun registerUser() {
-        val name = binding.etName.text.toString()
         val email = binding.etEmail.text.toString()
+        val name = binding.etName.text.toString()
+
         val mobileNumber = binding.etMob.text.toString()
         val address = binding.etAddr.text.toString()
         val city = binding.etCity.text.toString()
@@ -90,11 +91,11 @@ class RegisterFragment : Fragment() {
         // email and pass in it.
         auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(requireActivity()) {task ->
             if (task.isSuccessful) {
+                val uid = auth.currentUser?.uid!!
+                database= FirebaseDatabase.getInstance().getReference("NewUsers")
+                val user = User(name,email,uid,mobileNumber,address,city,state,pinCode,pass)
+                database.child("user").child(uid).setValue(user)
                 Toast.makeText(activity as Context, "Successfully Registered", Toast.LENGTH_SHORT).show()
-                database= FirebaseDatabase.getInstance().getReference("Users")
-                val user = User(name,email,mobileNumber,address,city,state,pinCode,pass)
-
-                database.child(name).setValue(user)
                 findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
             } else {
                 Toast.makeText(activity as Context, "Singed Up Failed!", Toast.LENGTH_SHORT).show()

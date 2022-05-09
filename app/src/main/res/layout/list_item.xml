@@ -48,7 +48,7 @@
             android:id="@+id/id_rate"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:text="399"
+            android:text="499"
             android:layout_below="@id/id_item"
             android:layout_toRightOf="@id/id_price"
             android:maxLength="20"

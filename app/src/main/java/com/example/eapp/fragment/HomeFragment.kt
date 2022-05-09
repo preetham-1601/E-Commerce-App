@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -58,6 +59,8 @@ class HomeFragment : Fragment() {
         binding.toolbar.toolbar.title = "Home"
         binding.rlLoading.visibility = View.VISIBLE
 
+
+
         binding.toolbar.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.search -> {
@@ -109,8 +112,13 @@ class HomeFragment : Fragment() {
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
 
-                R.id.fav->findNavController().navigate(R.id.action_homeFragment_to_favouritesFragment)
-                R.id.settings->findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
+
+                R.id.fav->{
+                    findNavController().navigate(R.id.action_homeFragment_to_favouritesFragment)
+                }
+                R.id.settings->{
+                    findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
+                }
 
             }
             true

@@ -105,11 +105,14 @@ class AllGiftsAdapter(private val context: Context, private var gifts: ArrayList
 
         holder.llContent.setOnClickListener {
             if(sessionManager.isFav()){
-                val bundle = bundleOf("image_url" to gift.giftImage,"caption" to gift.giftCaption)
+                val uid = sessionManager.getUid()
+                val bundle = bundleOf("image_url" to gift.giftImage,"caption" to gift.giftCaption,"uid" to uid)
                 sessionManager.setFavFrag(false)
                 findNavController(holder.idItem).navigate(R.id.action_favouritesFragment_to_itemDetailsFragment,bundle)
             }else{
-                val bundle = bundleOf("image_url" to gift.giftImage,"caption" to gift.giftCaption,)
+                val uid = sessionManager.getUid()
+
+                val bundle = bundleOf("image_url" to gift.giftImage,"caption" to gift.giftCaption,"uid" to uid)
                 findNavController(holder.idItem).navigate(R.id.action_homeFragment_to_itemDetailsFragment,bundle)
             }
         }
@@ -231,11 +234,7 @@ class AllGiftsAdapter(private val context: Context, private var gifts: ArrayList
 
             override fun publishResults(p0: CharSequence?, filterResults: FilterResults?) {
                 gifts = filterResults!!.values as ArrayList<Gift>
-                Toast.makeText(
-                    context,
-                    "$gifts",
-                    Toast.LENGTH_SHORT
-                ).show()
+
 
                 notifyDataSetChanged()
 

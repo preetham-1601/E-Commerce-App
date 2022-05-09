@@ -6,9 +6,10 @@ class SessionManager(context: Context) {
 
     var PRIVATE_MODE = 0
     val PREF_NAME = "EApp"
-
+ val bid = ""
     val KEY_IS_LOGGEDIN = "isLoggedIn"
     val KEY_IS_FAV = "isFav"
+
     var pref = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
     var editor = pref.edit()
 
@@ -20,6 +21,16 @@ class SessionManager(context: Context) {
         editor.putBoolean(KEY_IS_FAV, isFav)
         editor.apply()
     }
+    fun putUid(uid : String){
+        editor.putString(bid,uid)
+        editor.apply()
+    }
+    fun getUid(): String? {
+        return pref.getString(bid,null)
+    }
+
+
+
 
     fun isFav(): Boolean {
         return pref.getBoolean(KEY_IS_FAV, false)

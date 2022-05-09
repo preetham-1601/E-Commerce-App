@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
@@ -69,8 +70,12 @@ class FavouritesFragment : Fragment() {
             sessionManager.setFavFrag(false)
             when(it.itemId){
 
-                R.id.home->findNavController().navigate(R.id.action_favouritesFragment_to_homeFragment)
-                R.id.settings->findNavController().navigate(R.id.action_favouritesFragment_to_settingsFragment)
+                R.id.home->{
+                    findNavController().navigate(R.id.action_favouritesFragment_to_homeFragment)
+                }
+                R.id.settings->{
+                    findNavController().navigate(R.id.action_favouritesFragment_to_settingsFragment)
+                }
 
             }
             true

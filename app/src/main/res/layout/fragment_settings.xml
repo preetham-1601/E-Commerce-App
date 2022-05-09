@@ -27,6 +27,40 @@
             android:layout_marginTop="20dp"
             android:src="@drawable/download__1_" />
 
+        <TextView
+            android:id="@+id/txt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hii!!"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_below="@id/img_icn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textSize="17sp"/>
+        <TextView
+            android:id="@+id/txt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_below="@id/txt1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textSize="17sp"/>
+        <TextView
+            android:id="@+id/txt3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MobileNumber"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_below="@id/txt2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textSize="17sp"/>
+
 
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
