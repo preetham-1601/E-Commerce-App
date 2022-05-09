@@ -44,7 +44,7 @@ class AddNewAddressFragment : Fragment() {
 
         binding.toolbar.toolbar.setNavigationOnClickListener { view ->
             val bundle = bundleOf("caption" to sun,"image_url" to bun)
-            findNavController().navigate(R.id.action_addressFragment_to_cartFragment,bundle)
+            findNavController().navigate(R.id.action_addNewAddressFragment_to_addressFragment,bundle)
         }
 
 
@@ -53,6 +53,16 @@ class AddNewAddressFragment : Fragment() {
             Toast.makeText(
                 activity as Context,
                 "Added New Address",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            findNavController().navigate(R.id.action_addNewAddressFragment_to_addressFragment,bundle)
+        }
+        binding.btnUpd.setOnClickListener {
+            val bundle = bundleOf("caption" to sun,"image_url" to bun)
+            Toast.makeText(
+                activity as Context,
+                "Updated Address",
                 Toast.LENGTH_SHORT
             ).show()
 

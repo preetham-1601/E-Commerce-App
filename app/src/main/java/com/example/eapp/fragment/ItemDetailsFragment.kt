@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.eapp.R
@@ -60,6 +61,10 @@ class ItemDetailsFragment : Fragment() {
             val bundle = bundleOf("image_url" to bun,"caption" to dun)
             findNavController().navigate(R.id.action_itemDetailsFragment_to_cartFragment,bundle)
         }
+        binding.btnSend.setOnClickListener {
+            sendOrder()
+        }
+
 
 
 
@@ -68,5 +73,24 @@ class ItemDetailsFragment : Fragment() {
 
 
         return view
+    }
+
+    fun sendOrder() {
+
+        val dun =arguments?.getString("caption")
+        val bun = arguments?.getString("image_url")
+
+        val to = arrayOf<String>("Ajay@gmail.com")
+        val intent = Intent(Intent.ACTION_SENDTO).apply{
+            //.setType("text/plain")
+            data = Uri.parse("mailto:")
+            putExtra(Intent.EXTRA_EMAIL, to)
+            putExtra(Intent.EXTRA_SUBJECT, dun)
+            putExtra(Intent.EXTRA_STREAM, bun?.toUri())}
+
+
+        if (activity?.packageManager?.resolveActivity(intent, 0) != null) {
+            startActivity(intent)
+        }
     }
 }

@@ -106,10 +106,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/etState"
-            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
-            android:text="Add Address"
+            android:text="Add New Address"
             android:textColor="@color/white" />
+        <Button
+            android:id="@+id/btn_upd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/etState"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Update Address"
+            android:layout_toRightOf="@id/btn_addad"
+            android:textColor="@color/white" />
+
 
     </RelativeLayout>
 

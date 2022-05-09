@@ -1,6 +1,11 @@
 package com.example.eapp.fragment
 
+import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +18,11 @@ import com.example.eapp.R
 import com.example.eapp.databinding.FragmentCustomizationBinding
 import com.example.eapp.util.SessionManager
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
+import java.net.URI
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CustomizationFragment : Fragment() {
     private var _binding: FragmentCustomizationBinding? = null
@@ -20,6 +30,9 @@ class CustomizationFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     /*Variables used in managing the login session*/
     lateinit var sessionManager: SessionManager
+
+    lateinit var ImageUri : Uri
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +63,8 @@ class CustomizationFragment : Fragment() {
         sessionManager = SessionManager(activity as Context)
         binding.btnUp.setOnClickListener {
 
-            //searchImage()
+            selectImage()
+
 
         }
         binding.reset.setOnClickListener {
@@ -62,12 +76,48 @@ class CustomizationFragment : Fragment() {
             Toast.makeText(activity as Context, "Items saved", Toast.LENGTH_SHORT)
                 .show()
             findNavController().navigate(R.id.action_customizationFragment_to_cartFragment,bundle)
-            //uploadImage()
+            uplodeImage()
         }
 
 
 
 
         return view
+    }
+
+
+    fun selectImage() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+
+        startActivityForResult(intent,100)
+
+    }
+    fun uplodeImage(){
+
+        val formatter = SimpleDateFormat("yyy_MM_dd_HH_mm_ss", Locale.getDefault())
+        val now = Date()
+        val fileName =formatter.format(now)
+        val storageReference = FirebaseStorage.getInstance().getReference("images/$fileName")
+
+        storageReference.putFile(ImageUri).addOnSuccessListener{
+
+            binding.imgUpld.setImageURI(null)
+            Toast.makeText(context,"Successful Upload",Toast.LENGTH_LONG).show()
+
+        }.addOnFailureListener{
+
+            Toast.makeText(context,"Failed",Toast.LENGTH_LONG).show()
+
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == 100 && resultCode == RESULT_OK) {
+            ImageUri = data?.data!!
+            binding.imgUpld.setImageURI(ImageUri)
+
+        }
     }
 }
