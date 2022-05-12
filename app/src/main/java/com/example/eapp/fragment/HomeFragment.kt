@@ -127,7 +127,7 @@ class HomeFragment : Fragment() {
 
 
         val queue = Volley.newRequestQueue(activity as Context)
-        val url = "https://v1.nocodeapi.com/preetham/instagram/BDNRRhYYzNySAFHa"
+        val url = "https://v1.nocodeapi.com/bun/instagram/WOTVdunlmblnfrXW"
 
         val jsonObjectRequest = object : JsonObjectRequest(
             Method.GET,

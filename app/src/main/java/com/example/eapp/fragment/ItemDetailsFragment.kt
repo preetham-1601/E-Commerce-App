@@ -80,7 +80,7 @@ class ItemDetailsFragment : Fragment() {
         val dun =arguments?.getString("caption")
         val bun = arguments?.getString("image_url")
 
-        val to = arrayOf<String>("Ajay@gmail.com")
+        val to = arrayOf<String>("lifestyle.inn.12@gmail.com")
         val intent = Intent(Intent.ACTION_SENDTO).apply{
             //.setType("text/plain")
             data = Uri.parse("mailto:")

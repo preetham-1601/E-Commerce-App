@@ -28,7 +28,6 @@ class CustomizationFragment : Fragment() {
     private var _binding: FragmentCustomizationBinding? = null
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
-    /*Variables used in managing the login session*/
     lateinit var sessionManager: SessionManager
 
     lateinit var ImageUri : Uri
@@ -64,8 +63,6 @@ class CustomizationFragment : Fragment() {
         binding.btnUp.setOnClickListener {
 
             selectImage()
-
-
         }
         binding.reset.setOnClickListener {
             binding.editTextTextPersonName.text.clear()
