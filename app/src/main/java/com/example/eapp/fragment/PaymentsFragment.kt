@@ -74,6 +74,9 @@ class PaymentsFragment : Fragment() {
         binding.toolbar.toolbar.setNavigationIcon(R.drawable.ic_back)
         binding.toolbar.toolbar.title = "Payments"
 
+        val pri = sessionManager.getPrice()
+        binding.rate.text = pri
+
         binding.toolbar.toolbar.setNavigationOnClickListener { view ->
             val bundle = bundleOf("caption" to sun, "image_url" to bun)
             findNavController().navigate(R.id.action_paymentsFragment_to_cartFragment, bundle)

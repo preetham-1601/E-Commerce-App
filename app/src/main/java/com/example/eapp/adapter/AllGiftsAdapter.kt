@@ -52,6 +52,7 @@ class AllGiftsAdapter(private val context: Context, private var gifts: ArrayList
         holder.idItem.text=gift.giftCaption
 
 
+
         val listOfFavourites = GetAllFavAsyncTask(context).execute().get()
 
         if (listOfFavourites.isNotEmpty() && listOfFavourites.contains(gift.giftId.toString())) {
@@ -65,7 +66,7 @@ class AllGiftsAdapter(private val context: Context, private var gifts: ArrayList
                     val giftEntity = GiftEntity(
                         gift.giftId,
                         gift.giftImage,
-                        gift.giftCaption,
+                        gift.giftCaption
 
                         )
 

@@ -142,6 +142,7 @@ class HomeFragment : Fragment() {
                         giftJsonObject.getString("id"),
                         giftJsonObject.getString("media_url"),
                         giftJsonObject.getString("caption")
+
                     )
                     giftList.add(giftObject)
 

@@ -49,6 +49,9 @@ class CartFragment : Fragment() {
             binding.rlNoFavorites.visibility = View.GONE
             val sun = arguments?.getString("caption")
             binding.idItem.text = sun
+            val price = sun?.substring(10,13)
+            sessionManager.putPrice(price.toString())
+            binding.idRate.text = price.toString()
             val bun = arguments?.getString("image_url")
             Picasso.get().load(bun).into(binding.idImage)
 

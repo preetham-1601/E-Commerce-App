@@ -9,4 +9,5 @@ data class GiftEntity(
     @PrimaryKey val id: String,
     @ColumnInfo(name = "image_url") val imageUrl: String,
     @ColumnInfo(name = "caption") val caption: String
+
 )
