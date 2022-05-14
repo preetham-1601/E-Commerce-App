@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.example.eapp.R
 import com.example.eapp.databinding.FragmentPlaceOrderBinding
 
 class PlaceOrderFragment : Fragment() {
@@ -22,6 +24,11 @@ class PlaceOrderFragment : Fragment() {
     ): View? {
         _binding = FragmentPlaceOrderBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        binding.btn.setOnClickListener {
+
+            findNavController().navigate(R.id.action_placeOrderFragment_to_homeFragment)
+        }
         return view
     }
 

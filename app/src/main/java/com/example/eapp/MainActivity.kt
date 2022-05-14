@@ -14,7 +14,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.android.volley.toolbox.Volley
 import com.example.eapp.databinding.ActivityMainBinding
 import com.example.eapp.fragment.HomeFragment
-import com.example.eapp.fragment.MainScreenFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }*/
+
 
 
 

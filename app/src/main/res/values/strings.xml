@@ -25,6 +25,7 @@
     <string name="todo">TODO</string>
     <string name="customize">Customize</string>
     <string name="you_do_not_have_any_favourite_items">You Do Not Have Any Favourite Items</string>
+    <string name="payments_show_name" translatable="false">Successfully received payment data for %s!</string>
 
 
 </resources>

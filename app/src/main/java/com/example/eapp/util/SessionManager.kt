@@ -6,7 +6,7 @@ class SessionManager(context: Context) {
 
     var PRIVATE_MODE = 0
     val PREF_NAME = "EApp"
- val bid = ""
+    val bid = ""
     val pri = ""
     val KEY_IS_LOGGEDIN = "isLoggedIn"
     val KEY_IS_FAV = "isFav"
@@ -29,18 +29,6 @@ class SessionManager(context: Context) {
     fun getUid(): String? {
         return pref.getString(bid,null)
     }
-    fun putPrice(price : String){
-        editor.putString(pri,price)
-        editor.apply()
-    }
-    fun getPrice(): String? {
-        return pref.getString(pri,null)
-    }
-
-
-
-
-
 
     fun isFav(): Boolean {
         return pref.getBoolean(KEY_IS_FAV, false)

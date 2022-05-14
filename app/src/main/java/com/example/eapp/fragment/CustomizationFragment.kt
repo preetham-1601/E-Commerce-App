@@ -50,13 +50,15 @@ class CustomizationFragment : Fragment() {
         binding.toolbar.toolbar.setNavigationIcon(R.drawable.ic_back)
         binding.toolbar.toolbar.title = "Customization"
 
-        binding.toolbar.toolbar.setNavigationOnClickListener { view ->
-            findNavController().navigate(R.id.action_customizationFragment_to_cartFragment)
-        }
-
         val sun = arguments?.getString("caption")
 
         val bun = arguments?.getString("image_url")
+
+        binding.toolbar.toolbar.setNavigationOnClickListener { view ->
+            val bundle = bundleOf("caption" to sun,"image_url" to bun)
+            findNavController().navigate(R.id.action_customizationFragment_to_cartFragment,bundle)
+        }
+
 
 
         sessionManager = SessionManager(activity as Context)
@@ -105,7 +107,6 @@ class CustomizationFragment : Fragment() {
 
         }.addOnFailureListener{
 
-            Toast.makeText(context,"Failed",Toast.LENGTH_LONG).show()
 
         }
     }

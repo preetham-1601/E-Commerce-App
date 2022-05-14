@@ -11,11 +11,47 @@
         layout="@layout/toolbar"/>
 
     <RelativeLayout
+        android:id="@+id/item_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/round_border2">
+
+        <ImageView
+            android:id="@+id/id_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/c" />
+
+        <TextView
+            android:id="@+id/id_item"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="item name"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/id_image"
+            android:maxLength="20"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            />
+
+
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
         android:id="@+id/btm"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-
         android:background="@color/black">
 
         <TextView
@@ -42,15 +78,15 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="20dp"/>
 
-        <Button
-            android:id="@+id/btn_crt"
-            android:layout_width="wrap_content"
+        <ImageButton
+            android:id="@+id/googlePayButton"
+            android:layout_width="150dp"
             android:layout_height="60dp"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
+            android:background="@color/cream"
+            android:src="@drawable/buy_with_googlepay_button_content" />
 
-            android:text="Proceed to Payment"
-            android:textColor="#5D4037" />
 
 
     </RelativeLayout>

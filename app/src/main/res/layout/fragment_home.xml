@@ -24,6 +24,12 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
 
+    <RelativeLayout
+        android:id="@+id/rel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar">
+
     <TextView
         android:id="@+id/txt_f"
         android:layout_width="wrap_content"
@@ -31,7 +37,6 @@
         android:text="Featured"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:layout_below="@id/toolbar"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:textSize="17sp"/>
@@ -65,11 +70,12 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="30dp"
         android:src="@drawable/line_1" />
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_below="@id/img_ln"
+        android:layout_below="@id/rel"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         />

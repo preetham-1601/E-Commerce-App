@@ -143,6 +143,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/round_border"
         android:hint="Password *"
+        android:inputType="textPassword"
         android:paddingLeft="15dp"
         android:textSize="12dp" />
 
@@ -157,6 +158,7 @@
         android:layout_marginRight="30dp"
         android:background="@drawable/round_border"
         android:hint="Conform Password *"
+        android:inputType="textPassword"
         android:paddingLeft="15dp"
         android:textSize="13dp" />
     <Button

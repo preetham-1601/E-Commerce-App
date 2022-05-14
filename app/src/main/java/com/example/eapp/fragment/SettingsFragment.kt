@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -57,11 +58,19 @@ class SettingsFragment : Fragment() {
             when (it.itemId) {
                 R.id.action_logout ->{
                     mAuth = FirebaseAuth.getInstance()
+                    val builder = AlertDialog.Builder(context as Activity)
+                    builder.setTitle("Logout")
+                        .setMessage("Do you want to Logout?")
+                        .setPositiveButton("Logout") { _, _ ->
+                            mAuth.signOut()
+                            sessionManager.setLogin(false)
+                            findNavController().navigate(R.id.action_settingsFragment_to_loginFragment)
+                        }
+                        .setNegativeButton("No") { _, _ ->
 
-                    mAuth.signOut()
-                    sessionManager.setLogin(false)
-                    findNavController().navigate(R.id.action_settingsFragment_to_loginFragment)
-                    onDestroy()
+                        }
+                        .create()
+                        .show()
                     true
                 }
                 else -> false
@@ -122,18 +131,7 @@ class SettingsFragment : Fragment() {
         return super.onCreateOptionsMenu(menu,inflater)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.action_logout){
-            mAuth = FirebaseAuth.getInstance()
 
-            mAuth.signOut()
-            sessionManager.setLogin(false)
-            findNavController().navigate(R.id.action_settingsFragment_to_loginFragment)
-            onDestroy()
-            return true
-        }
-        return true
-    }
 
 
 

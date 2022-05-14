@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import com.example.eapp.R
 import com.example.eapp.databinding.FragmentForgotPasswordBinding
 import com.example.eapp.util.SessionManager
 import com.google.firebase.auth.FirebaseAuth
@@ -31,11 +34,29 @@ class ForgotPasswordFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
-
-
         sessionManager = SessionManager(activity as Context)
 
 
+        binding.btnReset.setOnClickListener {
+
+            val email: String = binding.etEmail.text.toString()
+            if(email.isEmpty()){
+                Toast.makeText(context, "Please enter email address", Toast.LENGTH_SHORT).show()
+            }else{
+                FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+                    .addOnCompleteListener {task->
+                        if(task.isSuccessful){
+                            Toast.makeText(context, "Email sent successfully you can reset your password", Toast.LENGTH_SHORT).show()
+                            findNavController().navigate(R.id.action_forgotPasswordFragment_to_loginFragment)
+                        }else{
+                            Toast.makeText(context, task.exception!!.message.toString(), Toast.LENGTH_SHORT).show()
+
+                        }
+
+                    }
+            }
+
+        }
 
 
         return view

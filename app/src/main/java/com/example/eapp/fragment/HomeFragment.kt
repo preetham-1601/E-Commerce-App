@@ -5,6 +5,8 @@ import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -45,8 +47,19 @@ class HomeFragment : Fragment() {
         val view = binding.root
 
 
+
         sessionManager = SessionManager(context as Activity)
         sessionManager.setFavFrag(false)
+
+        if(sessionManager.isLoggedIn()){
+            activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    activity!!.finish()
+                }
+            })
+        }else{
+
+        }
 
         return view
     }
@@ -62,33 +75,26 @@ class HomeFragment : Fragment() {
 
 
         binding.toolbar.toolbar.setOnMenuItemClickListener {
+            binding.bottomNavigationView.visibility= View.GONE
+            binding.rel.visibility = View.GONE
             when (it.itemId) {
                 R.id.search -> {
                     // Navigate to settings screen
                     val menuItem = binding.toolbar.toolbar.menu.findItem(R.id.search)
                     val searchView = menuItem.actionView as SearchView
 
+
                     searchView.maxWidth = Int.MAX_VALUE
                     searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                         override fun onQueryTextSubmit(filterString: String?): Boolean {
                             recyclerAdapter.filter.filter(filterString)
 
-                            Toast.makeText(
-                                activity as Context,
-                                "no",
-                                Toast.LENGTH_SHORT
-                            ).show()
                             return true
                         }
 
                         override fun onQueryTextChange(filterString: String?): Boolean {
                             recyclerAdapter.filter.filter(filterString)
 
-                            Toast.makeText(
-                                activity as Context,
-                                "Successfully LoggedIn",
-                                Toast.LENGTH_SHORT
-                            ).show()
                             return true
 
                         }
@@ -100,12 +106,31 @@ class HomeFragment : Fragment() {
                     true
                 }
                 R.id.action_cart ->{
-                    findNavController().navigate(R.id.action_homeFragment_to_cartFragment)
+                    if(sessionManager.isLoggedIn()){
+                        findNavController().navigate(R.id.action_homeFragment_to_cartFragment)
+                    }else{
+                        val builder = AlertDialog.Builder(context as Activity)
+                        builder.setTitle("Confirmation")
+                            .setMessage("Login to Use Your Cart")
+                            .setPositiveButton("Login") { _, _ ->
+                                sessionManager.setLogin(false)
+                                findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+
+                            }
+                            .setNegativeButton("No") { _, _ ->
+
+                            }
+                            .create()
+                            .show()
+                    }
+
                     true
                 }
                 else -> false
             }
         }
+        binding.rel.visibility = View.VISIBLE
+        binding.bottomNavigationView.visibility= View.VISIBLE
 
         binding.bottomNavigationView.selectedItemId = R.id.home
 

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
@@ -35,6 +36,7 @@ class CartFragment : Fragment() {
 
 
 
+
         sessionManager = SessionManager(context as Activity)
 
 
@@ -50,10 +52,28 @@ class CartFragment : Fragment() {
             val sun = arguments?.getString("caption")
             binding.idItem.text = sun
             val price = sun?.substring(10,13)
-            sessionManager.putPrice(price.toString())
             binding.idRate.text = price.toString()
             val bun = arguments?.getString("image_url")
             Picasso.get().load(bun).into(binding.idImage)
+
+            activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    val builder = AlertDialog.Builder(context as Activity)
+                    builder.setTitle("Confirmation")
+                        .setMessage("If you leave the screen the cart items will be removed")
+                        .setPositiveButton("Yes") { _, _ ->
+
+                            findNavController().navigate(R.id.action_cartFragment_to_homeFragment)
+
+
+                        }
+                        .setNegativeButton("No") { _, _ ->
+
+                        }
+                        .create()
+                        .show()
+                }
+            })
 
             binding.toolbar.toolbar.setNavigationOnClickListener { view ->
                 val builder = AlertDialog.Builder(context as Activity)
@@ -111,6 +131,11 @@ class CartFragment : Fragment() {
 
 
             }
+            activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigate(R.id.action_cartFragment_to_homeFragment)
+                }
+            })
         }
 
 

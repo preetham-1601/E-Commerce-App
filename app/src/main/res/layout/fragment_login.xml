@@ -40,6 +40,7 @@
             android:background="@drawable/round_border"
             android:drawableStart="@drawable/ic_baseline_lock_24"
             android:hint="Password"
+            android:inputType="textPassword"
             android:paddingLeft="10dp"
             android:textSize="17dp" />
 

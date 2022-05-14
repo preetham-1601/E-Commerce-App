@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.eapp.R
@@ -41,6 +42,11 @@ class LoginFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                activity!!.finish()
+            }
+        })
 
 
         sessionManager = SessionManager(activity as Context)
@@ -82,7 +88,7 @@ class LoginFragment : Fragment() {
                         sessionManager.putUid(uid)
                             Toast.makeText(
                                 activity as Context,
-                                "Successfully LoggedIn ",
+                                "Successfully LoggedIn",
                                 Toast.LENGTH_SHORT
                             ).show()
 
@@ -112,5 +118,8 @@ class LoginFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
+
 
 }

@@ -211,11 +211,7 @@ class AllGiftsAdapter(private val context: Context, private var gifts: ArrayList
 
 
                     var searchChr = charSequence.toString().lowercase()
-                    Toast.makeText(
-                        context,
-                        "$searchChr",
-                        Toast.LENGTH_SHORT
-                    ).show()
+
                     val itemModel = ArrayList<Gift>()
                     for(item in gifts){
 
