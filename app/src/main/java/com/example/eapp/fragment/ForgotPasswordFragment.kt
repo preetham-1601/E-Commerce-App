@@ -36,6 +36,12 @@ class ForgotPasswordFragment : Fragment() {
 
         sessionManager = SessionManager(activity as Context)
 
+        binding.toolbar.toolbar.setNavigationIcon(R.drawable.ic_back)
+        binding.toolbar.toolbar.title = "Forgot Password"
+        binding.toolbar.toolbar.setNavigationOnClickListener { view ->
+            findNavController().navigate(R.id.action_forgotPasswordFragment_to_loginFragment)
+        }
+
 
         binding.btnReset.setOnClickListener {
 

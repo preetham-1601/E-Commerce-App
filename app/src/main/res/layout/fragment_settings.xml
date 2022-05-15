@@ -25,13 +25,14 @@
             android:layout_below="@id/toolbar"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:src="@drawable/download__1_" />
+            android:src="@drawable/download__1_"
+            android:contentDescription="@string/todo" />
 
         <TextView
             android:id="@+id/txt1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hii!!"
+            android:text="@string/hii"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:layout_below="@id/img_icn"
@@ -42,7 +43,7 @@
             android:id="@+id/txt2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email"
+            android:text="@string/email"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:layout_below="@id/txt1"
@@ -53,7 +54,7 @@
             android:id="@+id/txt3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MobileNumber"
+            android:text="@string/mobilenumber"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:layout_below="@id/txt2"
@@ -66,11 +67,11 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
             android:layout_width="327dp"
-            android:layout_height="75dp"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="35dp"
-            android:background="#2ac7a2"
+            android:background="#3F51B5"
             app:menu="@menu/bottom_nav_menu" />
 
     </RelativeLayout>
@@ -88,7 +89,7 @@
             android:layout_height="200dp"
             android:layout_centerInParent="true"
             android:src="@drawable/filled_fav"
-            android:contentDescription="TODO" />
+            android:contentDescription="@string/todo" />
 
         <TextView
             android:layout_width="wrap_content"

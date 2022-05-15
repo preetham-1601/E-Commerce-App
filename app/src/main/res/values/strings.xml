@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Eapp</string>
+    <string name="app_name">GiftKart</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -22,10 +22,14 @@
     <string name="add_to_cart">Add to Cart</string>
     <string name="wishlist">WishList</string>
     <string name="description_and_customisation">Description and Customisation</string>
-    <string name="todo">TODO</string>
+
     <string name="customize">Customize</string>
     <string name="you_do_not_have_any_favourite_items">You Do Not Have Any Favourite Items</string>
     <string name="payments_show_name" translatable="false">Successfully received payment data for %s!</string>
+    <string name="hii">Hii!!</string>
+    <string name="email">Email</string>
+    <string name="mobilenumber">MobileNumber</string>
+    <string name="todo">TODO</string>
 
 
 </resources>

@@ -1,10 +1,8 @@
 package com.example.eapp.fragment
 
-import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -19,8 +17,6 @@ import com.example.eapp.databinding.FragmentCustomizationBinding
 import com.example.eapp.util.SessionManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
-import com.squareup.picasso.Picasso
-import java.net.URI
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -51,8 +51,6 @@ class CartFragment : Fragment() {
             binding.rlNoFavorites.visibility = View.GONE
             val sun = arguments?.getString("caption")
             binding.idItem.text = sun
-            val price = sun?.substring(10,13)
-            binding.idRate.text = price.toString()
             val bun = arguments?.getString("image_url")
             Picasso.get().load(bun).into(binding.idImage)
 
@@ -75,7 +73,7 @@ class CartFragment : Fragment() {
                 }
             })
 
-            binding.toolbar.toolbar.setNavigationOnClickListener { view ->
+            binding.toolbar.toolbar.setNavigationOnClickListener {
                 val builder = AlertDialog.Builder(context as Activity)
                 builder.setTitle("Confirmation")
                     .setMessage("If you leave the screen the cart items will be removed")
@@ -124,10 +122,10 @@ class CartFragment : Fragment() {
             binding.rlNoFavorites.visibility = View.VISIBLE
             binding.btm.visibility = View.GONE
 
-            binding.toolbar.toolbar.setNavigationOnClickListener { view ->
+            binding.toolbar.toolbar.setNavigationOnClickListener {
 
 
-                        findNavController().navigate(R.id.action_cartFragment_to_homeFragment)
+                findNavController().navigate(R.id.action_cartFragment_to_homeFragment)
 
 
             }
